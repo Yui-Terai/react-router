@@ -14,6 +14,18 @@ const Users = ({ match, location, history }) => {
 const Info = ({ match }) => {
   return (
     <div>
+      <ul>
+        <li>
+          <Link to={match.url + "/phone"}>Phone</Link>
+        </li>
+        <li>
+          <Link to={match.url + "/email"}>Email</Link>
+        </li>
+        <li>
+          <Link to={match.url + "/address"}>Address</Link>
+        </li>
+      </ul>
+      <hr />
       <Route
         path={match.url + "/phone"}
         render={props => <div>Phone: 123 456 7890</div>}
@@ -42,6 +54,9 @@ const App = () => (
         </li>
         <li>
           <Link to="/users">Users</Link>{" "}
+        </li>
+        <li>
+          <Link to="/info">Info</Link>{" "}
         </li>
       </ul>
       <hr />
