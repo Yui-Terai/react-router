@@ -1,6 +1,6 @@
 import React from "react";
 import { render } from "react-dom";
-import { BrowserRouter, Route, Link } from "react-router-dom";
+import { BrowserRouter, Route, Link, NavLink } from "react-router-dom";
 
 const Home = () => <div>Home</div>;
 const About = () => <div>About</div>;
@@ -9,6 +9,18 @@ const Users = ({ match, location, history }) => {
   console.log(`location: ${location}`);
   console.log(`history: ${history}`);
   return <div>{match.params.id}</div>;
+};
+
+const style = {
+  color: "red"
+};
+
+const activeEvent = (match, location) => {
+  if (!match) {
+    return false;
+  } else {
+    console.log("success!");
+  }
 };
 
 const Info = ({ match }) => {
@@ -47,16 +59,24 @@ const App = () => (
     <div>
       <ul>
         <li>
-          <Link to="/">Home</Link>
+          <NavLink exact to="/" activeStyle={style}>
+            Home
+          </NavLink>
         </li>
         <li>
-          <Link to="/about">About</Link>
+          <NavLink to="/about" activeStyle={style}>
+            About
+          </NavLink>
         </li>
         <li>
-          <Link to="/users">Users</Link>{" "}
+          <NavLink to="/users" activeStyle={style} isActive={activeEvent}>
+            Users
+          </NavLink>{" "}
         </li>
         <li>
-          <Link to="/info">Info</Link>{" "}
+          <NavLink to="/info" activeStyle={style}>
+            Info
+          </NavLink>{" "}
         </li>
       </ul>
       <hr />
