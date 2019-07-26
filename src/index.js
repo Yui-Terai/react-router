@@ -6,7 +6,8 @@ import {
   Link,
   NavLink,
   Switch,
-  Redirect
+  Redirect,
+  Prompt
 } from "react-router-dom";
 
 const Home = () => <div>Home</div>;
@@ -102,6 +103,7 @@ const App = () => (
         <Route path="/error" component={Error} />
         <Route component={DefaultRoute} />
       </Switch>
+      <Prompt when={false} message="Are you sure you want to leave?" />
     </div>
   </BrowserRouter>
 );
