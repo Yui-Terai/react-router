@@ -1,15 +1,27 @@
 import React from "react";
 import { render } from "react-dom";
-import { BrowserRouter, Route, Link, NavLink, Switch } from "react-router-dom";
+import {
+  BrowserRouter,
+  Route,
+  Link,
+  NavLink,
+  Switch,
+  Redirect
+} from "react-router-dom";
 
 const Home = () => <div>Home</div>;
 const About = () => <div>About</div>;
+const Error = () => <div>Error!: Invalid User</div>;
+
 const Users = ({ match, location, history }) => {
-  console.log(`match: ${match}`);
-  console.log(`location: ${location}`);
-  console.log(`history: ${history}`);
-  return <div>{match.params.id}</div>;
+  const validUsers = ["yui", "maria"];
+  if (!validUsers.includes(match.params.id)) {
+    return <Redirect to="/error/" />;
+  } else {
+    return <div>Welcome: {match.params.id}</div>;
+  }
 };
+
 const DefaultRoute = () => <div>Default route</div>;
 
 const style = {
@@ -83,9 +95,11 @@ const App = () => (
       <hr />
       <Switch>
         <Route exact path="/" component={Home} />
+        <Redirect exact from="/home" to="/" />
         <Route path="/about" component={About} />
         <Route path="/users/:id" component={Users} />
         <Route path="/info" component={Info} />
+        <Route path="/error" component={Error} />
         <Route component={DefaultRoute} />
       </Switch>
     </div>
