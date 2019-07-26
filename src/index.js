@@ -1,6 +1,6 @@
 import React from "react";
 import { render } from "react-dom";
-import { BrowserRouter, Route, Link, NavLink } from "react-router-dom";
+import { BrowserRouter, Route, Link, NavLink, Switch } from "react-router-dom";
 
 const Home = () => <div>Home</div>;
 const About = () => <div>About</div>;
@@ -10,6 +10,7 @@ const Users = ({ match, location, history }) => {
   console.log(`history: ${history}`);
   return <div>{match.params.id}</div>;
 };
+const DefaultRoute = () => <div>Default route</div>;
 
 const style = {
   color: "red"
@@ -80,10 +81,13 @@ const App = () => (
         </li>
       </ul>
       <hr />
-      <Route exact path="/" component={Home} />
-      <Route path="/about" component={About} />
-      <Route path="/users/:id" component={Users} />
-      <Route path="/info" component={Info} />
+      <Switch>
+        <Route exact path="/" component={Home} />
+        <Route path="/about" component={About} />
+        <Route path="/users/:id" component={Users} />
+        <Route path="/info" component={Info} />
+        <Route component={DefaultRoute} />
+      </Switch>
     </div>
   </BrowserRouter>
 );
